@@ -1,2 +1,2 @@
 # docs
-documents
+including all sage documents
