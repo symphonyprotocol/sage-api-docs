@@ -1,5 +1,4 @@
 # Status Code & Error Message
-___
 
 ### 0x1. Success Code
 |error_code| error| desc|
