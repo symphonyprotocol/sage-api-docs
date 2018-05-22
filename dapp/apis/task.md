@@ -3,146 +3,116 @@
 ### 0x0. Changes
 * init version - v0.01 at 2018-5-10
 
-### 0x1. Overview
+### 0x1. Classes
 Tasks are user based action to earn SAGE coin from doing activities such as AD video watching, questionnaire filling, location marking etc. Tasks are published by merchants who want to do brand development with target customers or precision marketing.
 Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. End users can earn SAGE coin from it.
+#### [TaskVideo Class]
+````javascript
+ {
+    "url": "/lol.mpeg",
+    "content": "<div>this is the main content shows in </div>",
+}
+````
+|Field|Type|Desc|
+|---|---|---|
+|url|string|video url|
+|content|HTML|detail content|
 
-### 0x2. task/{task_id}
+#### [TaskQuestion Class]
+````javascript
+{
+    "question": "your age?",
+    "answer_type": "choice",
+    "answers": [
+        {
+            "display_value": "10-16",
+            "value": "youngth"
+        }
+    ]
+}
+````
+|Field|Type|Desc|
+|---|---|---|
+|question|HTML| question|
+|answer_type|string|"choice": answers are from choice, "text": user input answer|
+|answers| answer||
+|display_value|HTML|answer display|
+|value| string| answer value|
+
+#### [TaskConfig Class]
+````javascript
+ {
+    "start_date": "2018-01-23 09:00:00",
+    "end_date": "2018-03-04 18:30:00",
+    "total_sage": 100000,
+    "sage_per_task": 20,
+    "profile": "[Profile]",
+    "cover_images":[
+        {
+            "url": "/lol01.png",
+        },
+    ],
+    "task_video": "[TaskVideo]"
+    "task_questionnaire": [
+        {
+            "class_type": "[TaskQuestion]",
+        }
+    ]
+}
+````
+|Field|Type|Value|
+|---|---|---|
+|start_date| string| task start date|
+|end_date|string |task end date|
+|total_sage|int|total sage of task that can used|
+|sage_per_task|int|sage that one person can earn from the task|
+|profile|Profile| task related profile|
+|cover_images| JSON| images shows in task list or detail|
+|cover_iamges url| string| image url|
+|task_video|TaskVideo| task video class|
+|task_questionnaire|TaskQuestion list| task question class list|
+
+#### [TaskStatus Class]
+{
+    "task_total_click": 100,
+    "task_total_done": 81,
+}
+|Field|Type|Desc|
+|--|--|--|
+|task_total_click|int|total summary of task click by end users|
+|task_total_done|int|total summary of task done by end users|
+
+#### [Task Class]
+````javascript
+{
+    "id": "18xks9131232xs",
+    "name": "LOL Vedio",
+    "description": "LOL game hunting",
+    "task_type": "video",
+    "task_config":"[TaskConfig]",
+    "merchant_info": "[MerchantInfo]",
+    "task_status": "[TaskStatus]"
+}
+````
+|Field|Type|Desc|
+|---|---|---|
+|id|string|task id|
+|name|string|task display name|
+|description|string/HTML|task description|
+|task_type|string|"video": for video task, "questionnarie":for questionnarie task|
+|task_config|TaskConfig| task config class|
+|merchant_info|MerchantInfo|merchant info class|
+|task_status|TaskStatus|task status class|
+
+### 0x2. [API] task/{task_id}
 * **Http Method:** GET/POST/PUT/DELETE
 * **NeedMachineTicket:** NO
 * **NeedUserTicket:** YES
 #### Task JSON
 ````javascript
 {
-    "id": "18xks9131232xs",
-    "name": "LOL Vedio",
-    "description": "LOL game hunting",
-    "start_date": "2018-01-23",
-    "end_date": "2018-03-04",
-    "display_images":[
-        {
-            "url": "/lol01.png",
-        },
-    ],
-    "merchant": {
-        "id": "18x8s8sd8f39",
-        "name": "GamePlay LTD",
-        "logo": "/gameplay.png",
-    },
-    "profile": [Profile Class],
-    "task_config": {
-        "total_sage": 100000,
-        "per_sage": 20,
-    },
-    "status": {
-        "task_click": 100,
-        "task_done": 81
-    },
-    "type": "video",
-    "video": {
-        "url": "/lol.mpeg",
-        "content": "<div>this is the main content shows in </div>",
-    },
-    "questionnaire": {
-        "questions":[
-            {
-                "question": "your age?",
-                "answer_type": "choice",
-                "answers": [
-                    {
-                        "display_value": "10-16",
-                        "value": "youngth"
-                    }
-                ]
-            }
-        ]
-    }
+   [TaskClass]
 }
 ````
-#### Task Class
-|Field|Type|Desc|
-|----|----|----|
-|id| string| task id|
-|name| string| task name|
-|description| string| task description, can be HTML format|
-|start_date|string|task start date|
-|end_date|string|task end date|
-|display_images| list | images list|
-|merchant| Merchant| publish merchant|
-|profile|Profile class|referer to [profile class](./profile.md)|
-|task_config| TaskConfig| task configuration|
-|status| Status| task status|
-|type| string| "video" for video type, "questionnaire" for questionnaire type|
-|video|Video|optional|
-|questionnaire|Questionnaire|optional|
 
-#### Merchant Class
-|Field|Type|Desc|
-|----|----|----|
-|id| string| merchant id|
-|name| string| merchant name|
-|logo| string| merchant log url|
-
-#### TaskConfig Class
-|Field|Type|Desc|
-|----|----|----|
-|total_sage|int64|total sage asgin to task|
-|per_sage|int64|every task finish can get reward amount|
-
-#### Status Class
-|Field|Type|Desc|
-|----|----|----|
-|task_click|int|user click task amount|
-|task_done|int|total task finish amount|
-
-#### Video Class
-|Field|Type|Desc|
-|----|----|----|
-|url|string|video url|
-|content|string| videon content, can be HTML format|
-
-#### Questionnaire Class
-|Field|Type|Desc|
-|----|----|----|
-|question|string| question content, can be HTML format|
-|answer_type|string| "choice","text"|
-|answers| Answer list||
-
-#### Answer Class
-|Field|Type|Desc|
-|----|----|----|
-|display_value|string|display content, can be HTML format|
-|value|string|real backend value|
-
-### 0x3. tasks/{user_id}/{task_id}
-Get task list for specific user
-* **Http Method:** GET
-* **NeedMachineTicket:** NO
-* **NeedUserTicket:** YES
-
-#### Request Params
-|Field|Type|Desc|
-|----|----|----|
-|user_id|string| user id|
-|task_id|string|latest task id user get, if not, set to "0"|
-
-#### Return Result 
-````javascript
-"result": {
-    "tasks":[
-        {
-            [Task Class],
-            "status": {
-                "action": "finish",
-                "action_date": "2018-02-03"
-            }
-        },
-    ]
-}
-````
-|Field|Type|Desc|
-|----|----|----|
-|[Task class]|Task| task items in 0x1|
-|action|string|"finish":already done, "no": no action|
-|action_date|string|finish date|
 
