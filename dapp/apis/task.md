@@ -6,6 +6,31 @@
 ### 0x1. Classes
 Tasks are user based action to earn SAGE coin from doing activities such as AD video watching, questionnaire filling, location marking etc. Tasks are published by merchants who want to do brand development with target customers or precision marketing.
 Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. End users can earn SAGE coin from it.
+
+#### [Merchant Class]
+
+```javascript
+{
+  	"merchantid": "ce61b3f5-0e69-4c6a-89a2-2767771aacc9",
+    "merchantname": "UNIQ",
+    "desc": "Japanese clothing manufacturer",
+    "logo": "https://api.sageit.vip/task/logo/UNIQ.jpg" 
+}
+```
+
+#### [Profile Class]
+
+```javascript
+{
+  	"id":"cf0065be-fe23-4824-8c40-ff0e62de1c7f",
+    "name": "soft drink",
+    "categroy": {
+        "id": "80a41c20-72a0-41ff-9de9-950e5c5ce91b",
+        "name": "drink",
+    }
+}
+```
+
 #### [TaskVideo Class]
 ````javascript
  {
@@ -13,10 +38,10 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
     "content": "<div>this is the main content shows in </div>",
 }
 ````
-|Field|Type|Desc|
-|---|---|---|
-|url|string|video url|
-|content|HTML|detail content|
+| Field   | Type   | Desc           |
+| ------- | ------ | -------------- |
+| url     | string | video url      |
+| content | HTML   | detail content |
 
 #### [TaskQuestion Class]
 ````javascript
@@ -31,13 +56,13 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
     ]
 }
 ````
-|Field|Type|Desc|
-|---|---|---|
-|question|HTML| question|
-|answer_type|string|"choice": answers are from choice, "text": user input answer|
-|answers| answer||
-|display_value|HTML|answer display|
-|value| string| answer value|
+| Field         | Type   | Desc                                     |
+| ------------- | ------ | ---------------------------------------- |
+| question      | HTML   | question                                 |
+| answer_type   | string | "choice": answers are from choice, "text": user input answer |
+| answers       | answer |                                          |
+| display_value | HTML   | answer display                           |
+| value         | string | answer value                             |
 
 #### [TaskConfig Class]
 ````javascript
@@ -60,27 +85,27 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
     ]
 }
 ````
-|Field|Type|Value|
-|---|---|---|
-|start_date| string| task start date|
-|end_date|string |task end date|
-|total_sage|int|total sage of task that can used|
-|sage_per_task|int|sage that one person can earn from the task|
-|profile|Profile| task related profile|
-|cover_images| JSON| images shows in task list or detail|
-|cover_iamges url| string| image url|
-|task_video|TaskVideo| task video class|
-|task_questionnaire|TaskQuestion list| task question class list|
+| Field              | Type              | Value                                    |
+| ------------------ | ----------------- | ---------------------------------------- |
+| start_date         | string            | task start date                          |
+| end_date           | string            | task end date                            |
+| total_sage         | int               | total sage of task that can used         |
+| sage_per_task      | int               | sage that one person can earn from the task |
+| profile            | Profile           | task related profile                     |
+| cover_images       | JSON              | images shows in task list or detail      |
+| cover_iamges url   | string            | image url                                |
+| task_video         | TaskVideo         | task video class                         |
+| task_questionnaire | TaskQuestion list | task question class list                 |
 
 #### [TaskStatus Class]
 {
     "task_total_click": 100,
     "task_total_done": 81,
 }
-|Field|Type|Desc|
-|--|--|--|
-|task_total_click|int|total summary of task click by end users|
-|task_total_done|int|total summary of task done by end users|
+| Field            | Type | Desc                                     |
+| ---------------- | ---- | ---------------------------------------- |
+| task_total_click | int  | total summary of task click by end users |
+| task_total_done  | int  | total summary of task done by end users  |
 
 #### [Task Class]
 ````javascript
@@ -94,15 +119,15 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
     "task_status": "[TaskStatus]"
 }
 ````
-|Field|Type|Desc|
-|---|---|---|
-|id|string|task id|
-|name|string|task display name|
-|description|string/HTML|task description|
-|task_type|string|"video": for video task, "questionnarie":for questionnarie task|
-|task_config|TaskConfig| task config class|
-|merchant_info|MerchantInfo|merchant info class|
-|task_status|TaskStatus|task status class|
+| Field         | Type         | Desc                                     |
+| ------------- | ------------ | ---------------------------------------- |
+| id            | string       | task id                                  |
+| name          | string       | task display name                        |
+| description   | string/HTML  | task description                         |
+| task_type     | string       | "video": for video task, "questionnarie":for questionnarie task |
+| task_config   | TaskConfig   | task config class                        |
+| merchant_info | MerchantInfo | merchant info class                      |
+| task_status   | TaskStatus   | task status class                        |
 
 ### 0x2. [API] task/{task_id}
 * **Http Method:** GET/POST/PUT/DELETE
@@ -115,4 +140,77 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
 }
 ````
 
+### 0x3. [API] tasks
+
+Get all merchant tasks.
+
+- **Http Method:** GET
+- **NeedMachineTicket:** NO
+- **NeedUserTicket:** YES
+
+#### Response JSON
+
+```javascript
+"result": {
+  	"tasks": [
+      	{
+  			"taskid":"f5847b18-2edc-46fe-95ee-c73a9cbb0c9e",
+          	"merchant":{
+              	[Merchant Class]
+            },
+          	"title": "Wonderful Show",
+          	"desc": "Something interesting",
+          	"display_img": [
+              	"https://api.sageit.vip/task/1","https://api.sageit.vip/task/1"
+            ],
+          	"type": "video"|"survey",
+          	"url": "https://api.sageit.vip/task/content",
+          	"reward": 22,
+          	"start_date": "2018062500",
+          	"end_date": "2018070200",
+          	"target": "man",
+          	"task_done": 210,
+          	"task_total": 500,
+          	"task_active": 120,
+          	"profiles": [
+  				{
+  					[Profile Class],[Profile Class]...
+				}
+			]
+		}  		
+	]
+}
+```
+
+### 0x3. tasks/task_id/finsh
+
+Change task history.
+
+- **Http Method:** POST
+- **NeedMachineTicket:** NO
+- **NeedUserTicket:** YES
+
+#### Request JSON
+
+```javascript
+{
+	"taskid": "f5847b18-2edc-46fe-95ee-c73a9cbb0c9e"
+}
+```
+
+### 0x4. tasks/task_id/diss
+
+Action for user to dislike some merchants.
+
+- **Http Method:** POST
+- **NeedMachineTicket:** NO
+- **NeedUserTicket:** YES
+
+#### Request JSON
+
+```javascript
+{
+  	"merchantid": "ce61b3f5-0e69-4c6a-89a2-2767771aacc9"
+}
+```
 
