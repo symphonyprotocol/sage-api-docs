@@ -69,6 +69,7 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
  {
     "start_date": "2018-01-23 09:00:00",
     "end_date": "2018-03-04 18:30:00",
+    "target": "m",
     "total_sage": 100000,
     "sage_per_task": 20,
     "profile": "[Profile]",
@@ -116,7 +117,7 @@ Currently in our sysetm, we support 2 kind of tasks, video and questionnaire. En
     "task_type": "video",
     "task_config":"[TaskConfig]",
     "merchant_info": "[MerchantInfo]",
-    "task_status": "[TaskStatus]"
+    "task_status": "[TaskStatus]",
 }
 ````
 | Field         | Type         | Desc                                     |
@@ -153,31 +154,7 @@ Get all merchant tasks.
 ```javascript
 "result": {
   	"tasks": [
-      	{
-  			"taskid":"f5847b18-2edc-46fe-95ee-c73a9cbb0c9e",
-          	"merchant":{
-              	[Merchant Class]
-            },
-          	"title": "Wonderful Show",
-          	"desc": "Something interesting",
-          	"display_img": [
-              	"https://api.sageit.vip/task/1","https://api.sageit.vip/task/1"
-            ],
-          	"type": "video"|"survey",
-          	"url": "https://api.sageit.vip/task/content",
-          	"reward": 22,
-          	"start_date": "2018062500",
-          	"end_date": "2018070200",
-          	"target": "man",
-          	"task_done": 210,
-          	"task_total": 500,
-          	"task_active": 120,
-          	"profiles": [
-  				{
-  					[Profile Class],[Profile Class]...
-				}
-			]
-		}  		
+		[Task Class] 		
 	]
 }
 ```
