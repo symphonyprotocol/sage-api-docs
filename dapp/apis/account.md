@@ -10,7 +10,14 @@
 
 ```javascript
 {
-  	"addressid"
+  	"ID":"ce61b3f5-0e69-4c6a-89a2-2767771aacc9",
+    "receiveName":"xiaoming",
+    "mobile":"18888888888",
+    "cityID":"3783e213-7777-4518-9787-5e7fdc674eae",
+    "street":"pudong",
+    "zipCode":"201424",
+    "isDefault":1,
+    "isValid":1
 }
 ```
 
@@ -18,35 +25,34 @@
 
 ```javascript
 {
-  	"tradeid"
+  	"tradeID"
 }
 ```
 
-#### [Merchant Class]
+#### [DissMerchant Class]
 
 ```javascript
 {
-  	"merchantid": "ce61b3f5-0e69-4c6a-89a2-2767771aacc9",
-    "merchantname": "UNIQ",
-    "desc": "Japanese clothing manufacturer",
-    "logo": "https://api.sageit.vip/task/logo/UNIQ.jpg" 
+  	"ID": "ce61b3f5-0e69-4c6a-89a2-2767771aacc9",
+    "merchantID": "3783e213-7777-4518-9787-5e7fdc674eae",
+    "isValid":1
 }
 ```
 
-#### [Profile Class]
+#### [AccountProfile Class]
 
 ```javascript
 {
-    "id":"cf0065be-fe23-4824-8c40-ff0e62de1c7f",
-    "name": "soft drink",
-    "categroy": {
-        "id": "80a41c20-72a0-41ff-9de9-950e5c5ce91b",
-        "name": "drink",
-    }
+    "ID":"cf0065be-fe23-4824-8c40-ff0e62de1c7f",
+    "profileID": "3783e213-7777-4518-9787-5e7fdc674eae",
+    "type":0,
+    "isValid":1,
 }
 ```
 
-### 0x2. account
+### 0x2. account/:action
+
+Desc: action is "info", "address", "dissmerchant" or "profile"
 
 Get all user account information.
 
@@ -59,39 +65,31 @@ Get all user account information.
 ```javascript
 "result":{
 	"mobile": "18314231423",
-    "displayname": "xiaoming",
-    "avatar": "https://api.sageit.vip/avator/",
+    "displayName": "xiaoming",
+    "avatar": "avatar.jpg",
     "gender": "M",
-    "address":[
+    "addresses":[
       	{
   			[Address Class],
 		}
     ],
-    "birth": "19941113",
-    "loginpwd": "060077037e418c6909bd8730f769d04fe384e91958f89a03ae6540a639480597",
-    "paypwd": "060077037e418c6909bd8730f769d04fe384e91958f89a03ae6540a639480597",
+    "birth": "1994-11-13",
     "balance": 100,
-    "walletaddress": "1hvzSofGwT8cjb8JU7nBsCSfEVQX5u9CL",
+    "walletAddress": "1hvzSofGwT8cjb8JU7nBsCSfEVQX5u9CL",
     "trades":[
   		{
   			[Trade Class]
 		}
 	],
-    "profiles": {
-  		"like":[
+    "profiles": [
   			{
-              	[Profile Class],
-            }
-		],
-        "unlike":[
-  			{
-              	[Profile Class],
+              	[AccountProfile Class],
             }
 		],
 	},
-    "dissmerchant":[
+    "dissMerchants":[
 		{
-  			[Merchant Class]
+  			[DissMerchant Class]
 		}  
 	]    
 }
@@ -123,9 +121,15 @@ For user modify some information.
 #### Request JSON
 
 ```javascript
-{
-  	"displayname": "xiaofang",
-    "walletaddress": "1hvzSofGwT8cjb8JU7nBsCSfEVQX5u9CL", 
+{	
+	"displayName":"mes",
+	"walletAddress":"asdasd",
+	"action":"address",
+	"addresses":[
+			{
+  				[Address Class]
+			}
+		]
 }
 ```
 
@@ -135,11 +139,11 @@ For user modify some information.
 
 - **Http Method:** PUT
 - **NeedMachineTicket:** NO
-- **NeedUserTicket:** YESRequest JSON
+- **NeedUserTicket:** YES
 
 ```javascript
 {
-  	"avator":Binary,
+  	"avatar":"avatar.jpg",
 }
 ```
 
